@@ -1,0 +1,38 @@
+---
+// PAGE D'ACCUEIL
+// Ce fichier est dans src/pages/index.astro
+// donc il correspond à la route "/" (la racine du site).
+
+// On importe le layout et le composant qu'on veut utiliser
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Carte from '../components/Carte.astro';
+
+// On peut écrire du JS ici pour préparer des données.
+// Ça s'exécute au BUILD (quand on génère le site), pas dans le navigateur.
+const competences = [
+  { titre: "HTML & CSS", description: "La base du web. Structure et style.", lien:"http://localhost:4321/a-propos" },
+  { titre: "JavaScript", description: "Ajouter de l'interactivité et de la logique.", lien:"http://localhost:4321/a-propos" },
+  { titre: "Astro", description: "Générer des sites rapides avec un minimum de JS."},
+];
+---
+
+<!-- On "enveloppe" notre contenu dans le layout -->
+<!-- titre="accueil" envoie cette valeur au layout (c'est une "prop") -->
+<BaseLayout titre="accueil" MetaDescription="Ceci est une metadescription">
+
+  <h1>bienvenue sur mon site</h1>
+  <p>
+    Ceci est un site construit avec Astro pour apprendre les bases.
+    Tout ce que tu vois ici est du HTML statique, aucun JavaScript
+    n'est envoyé au navigateur.
+  </p>
+
+  <h2>ce que j'apprends</h2>
+
+  <!-- .map() parcourt le tableau et crée une Carte pour chaque élément.
+       C'est comme une boucle for, mais en style JS. -->
+  {competences.map((c) => (
+    <Carte titre={c.titre} description={c.description} lien={c.lien}/>
+  ))}
+
+</BaseLayout>

@@ -1,0 +1,89 @@
+---
+// LAYOUT : c'est le squelette HTML partagé par toutes les pages.
+// Pense à ça comme ton "template de base" en HTML classique,
+// sauf qu'au lieu de copier-coller le <head> et le <nav> partout,
+// tu l'écris une seule fois ici.
+
+// "Props" = les données que la page envoie au layout.
+// Ici on attend un titre de page.
+interface Props {
+  titre: string;
+}
+
+// On récupère le titre envoyé par la page qui utilise ce layout
+const { titre } = Astro.props;
+const { MetaDescription } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- {titre} injecte la valeur de la variable "titre" -->
+  <title>{titre}</title>
+  <meta name="description" content={MetaDescription}> 
+</head>
+<body>
+  <nav>
+    <a href="/">accueil</a>
+    <a href="/a-propos">à propos</a>
+    <a href="/projets">projets</a>
+    <a href="/blog">blog</a>
+  </nav>
+
+  <main>
+    <!-- <slot /> = "mets ici le contenu de la page" -->
+    <!-- C'est comme un trou dans le template que chaque page remplit -->
+    <slot />
+  </main>
+
+  <footer>
+    <p>Mon premier site Astro &mdash; 2026</p>
+  </footer>
+</body>
+</html>
+
+<style>
+  /* Le CSS dans un fichier .astro est automatiquement "scopé" :
+     il ne s'applique QU'à ce composant, pas au reste du site.
+     Très pratique pour éviter les conflits de styles. */
+
+  body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #1a1a1a;
+    background: #fafafa;
+  }
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    background: #1a1a1a;
+  }
+
+  nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+
+  main {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+// COMPOSANT : un morceau d'interface réutilisable.
+// C'est comme créer ton propre élément HTML personnalisé.
+// Au lieu d'écrire <div class="carte">...</div> partout,
+// tu écris <Carte titre="..." /> et c'est tout.
+
+interface Props {
+  titre: string;
+  description: string;
+  lien: string;
+  technologies: string;
+}
+
+const { titre, description, lien, technologies } = Astro.props;
+---
+
+<article class="carte">
+  <h3>{titre}</h3>
+  <p>{description}</p>
+  {lien && <a href={lien}>Cliquez pour en savoir plus</a>}
+  {technologies && <p>{technologies}</p>}
+</article>
+
+<style>
+  .carte {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    background: white;
+  }
+
+  .carte h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2a2a2a;
+  }
+
+  .carte p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+  }
+
+
+</style>

@@ -1,0 +1,39 @@
+---
+// PAGE "À PROPOS"
+// Fichier : src/pages/a-propos.astro
+// Route automatique : /a-propos
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Exemple : une variable simple utilisée dans le template
+const anneeDebut = 2025;
+const anneeActuelle = new Date().getFullYear();
+const experience = anneeActuelle - anneeDebut;
+---
+
+<BaseLayout titre="à propos">
+
+  <h1>à propos</h1>
+  <p>
+    Je suis en train d'apprendre le développement web depuis {experience} an(s).
+    Ce site me sert de terrain de jeu pour expérimenter avec Astro.
+  </p>
+
+  <h2>pourquoi Astro ?</h2>
+  <p>
+    Astro génère du HTML pur par défaut. Pas de framework JavaScript lourd
+    envoyé au navigateur. Le résultat : des pages ultra-rapides et un code
+    facile à comprendre quand on vient du HTML/CSS classique.
+  </p>
+
+  <h2>comment ce site est construit</h2>
+  <p>
+    Ce site utilise trois concepts Astro fondamentaux :
+  </p>
+  <ul>
+    <li><strong>un layout</strong> (BaseLayout.astro) pour la structure commune</li>
+    <li><strong>des composants</strong> (Carte.astro) pour les morceaux réutilisables</li>
+    <li><strong>des pages</strong> (ce fichier !) pour chaque route du site</li>
+  </ul>
+
+</BaseLayout>

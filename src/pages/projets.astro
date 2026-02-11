@@ -1,0 +1,53 @@
+---
+// PAGE "PROJETS"
+// Cette page montre deux techniques utiles :
+// 1. Les boucles avec .map() pour afficher une liste
+// 2. Le rendu conditionnel avec l'opérateur ternaire et &&
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Carte from '../components/Carte.astro';
+
+const projets = [
+  {
+    titre: "site perso",
+    description: "Ce site ! Construit avec Astro pour apprendre.",
+    termine: true,
+    technologies: "HTML"
+  },
+  {
+    titre: "portfolio photo",
+    description: "Une galerie pour mes photos de voyage.",
+    termine: false,
+    technologies: "Astro et HTML"
+  },
+  {
+    titre: "blog",
+    description: "Un blog avec des articles en Markdown.",
+    termine: false,
+  },
+];
+
+// .filter() crée un nouveau tableau avec seulement les éléments qui passent le test
+const termines = projets.filter((p) => p.termine);
+const enCours = projets.filter((p) => !p.termine);
+---
+
+<BaseLayout titre="projets">
+
+  <h1>mes projets</h1>
+
+  <h2>terminés</h2>
+  <!-- Si le tableau est vide, on affiche un message alternatif.
+       condition && <element> = affiche l'élément seulement si la condition est vraie -->
+  {termines.length === 0 && <p>Aucun projet terminé pour l'instant.</p>}
+  {termines.map((p) => (
+    <Carte titre={p.titre} description={p.description} technologies={p.technologies}/>
+  ))}
+
+  <h2>en cours</h2>
+  {enCours.length === 0 && <p>Aucun projet en cours.</p>}
+  {enCours.map((p) => (
+    <Carte titre={p.titre} description={p.description} technologies={p.technologies}/>
+  ))}
+
+</BaseLayout>

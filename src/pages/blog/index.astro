@@ -1,0 +1,35 @@
+---
+// PAGE LISTE DU BLOG
+// Route : /blog
+// Cette page affiche tous les articles de la collection "blog".
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Carte from '../../components/Carte.astro';
+
+// getCollection() va chercher tous les fichiers .md dans src/content/blog/
+// C'est une fonction fournie par Astro, on n'a rien à coder nous-mêmes.
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('blog');
+
+// On trie les articles par date, du plus récent au plus ancien.
+// .sort() compare deux éléments et les range dans l'ordre.
+const articlesTries = articles.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout titre="blog">
+
+  <h1>mon blog</h1>
+  <p>Mes articles sur l'apprentissage du développement web.</p>
+
+  {articlesTries.map((article) => (
+    <Carte
+      titre={article.data.titre}
+      description={article.data.description}
+      lien={`/blog/${article.id}`}
+    />
+  ))}
+
+</BaseLayout>
