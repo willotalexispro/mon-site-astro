@@ -1,14 +1,9 @@
 ---
-// COMPOSANT : un morceau d'interface réutilisable.
-// C'est comme créer ton propre élément HTML personnalisé.
-// Au lieu d'écrire <div class="carte">...</div> partout,
-// tu écris <Carte titre="..." /> et c'est tout.
-
 interface Props {
   titre: string;
   description: string;
-  lien: string;
-  technologies: string;
+  lien?: string;
+  technologies?: string;
 }
 
 const { titre, description, lien, technologies } = Astro.props;
@@ -16,30 +11,54 @@ const { titre, description, lien, technologies } = Astro.props;
 
 <article class="carte">
   <h3>{titre}</h3>
-  <p>{description}</p>
-  {lien && <a href={lien}>Cliquez pour en savoir plus</a>}
-  {technologies && <p>{technologies}</p>}
+  <p class="carte-desc">{description}</p>
+  {technologies && <p class="carte-tech">{technologies}</p>}
+  {lien && <a href={lien} class="carte-lien">En savoir plus</a>}
 </article>
 
 <style>
   .carte {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .carte:hover {
+    transform: translateY(-3px);
+    border-color: rgba(74, 144, 217, 0.4);
   }
 
   .carte h3 {
-    margin: 0 0 0.5rem 0;
-    color: #081c37;
+    margin: 0 0 0.75rem 0;
+    color: #ffffff;
+    font-size: 1.15rem;
   }
 
-  .carte p {
+  .carte-desc {
     margin: 0;
-    color: #555;
-    line-height: 1.5;
+    color: #bbb;
+    line-height: 1.6;
+    font-size: 0.95rem;
   }
 
+  .carte-tech {
+    margin: 0.75rem 0 0 0;
+    color: #4a90d9;
+    font-size: 0.85rem;
+  }
 
+  .carte-lien {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #4a90d9;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .carte-lien:hover {
+    text-decoration: underline;
+  }
 </style>

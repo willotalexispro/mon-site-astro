@@ -1,0 +1,37 @@
+---
+interface Props {
+  chiffre: string;
+  description: string;
+}
+
+const { chiffre, description } = Astro.props;
+---
+
+<div class="stat">
+  <span class="chiffre">{chiffre}</span>
+  <p>{description}</p>
+</div>
+
+<style>
+  .stat {
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+    padding: 1rem;
+  }
+
+  .chiffre {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4a90d9;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat p {
+    margin: 0;
+    color: #e0e0e0;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+</style>

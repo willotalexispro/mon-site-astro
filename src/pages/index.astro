@@ -1,38 +1,277 @@
 ---
-// PAGE D'ACCUEIL
-// Ce fichier est dans src/pages/index.astro
-// donc il correspond à la route "/" (la racine du site).
-
-// On importe le layout et le composant qu'on veut utiliser
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Carte from '../components/Carte.astro';
+import Temoignage from '../components/Temoignage.astro';
+import Stat from '../components/Stat.astro';
 
-// On peut écrire du JS ici pour préparer des données.
-// Ça s'exécute au BUILD (quand on génère le site), pas dans le navigateur.
-const competences = [
-  { titre: "HTML & CSS", description: "La base du web. Structure et style.", lien:"http://localhost:4321/a-propos" },
-  { titre: "JavaScript", description: "Ajouter de l'interactivité et de la logique.", lien:"http://localhost:4321/a-propos" },
-  { titre: "Astro", description: "Générer des sites rapides avec un minimum de JS."},
+const services = [
+  {
+    titre: "Soyez visible",
+    description: "Référencez votre commerce sur les sites, les réseaux sociaux et les annuaires les plus consultés. Nos experts SEO vous aident à la rédaction de vos profils web.",
+    lien: "#",
+  },
+  {
+    titre: "Gérez votre e-réputation",
+    description: "Collectez et gérez les avis de vos clients pour augmenter votre note globale. Retrouvez tous vos commentaires sur une seule et même plateforme.",
+    lien: "#",
+  },
+  {
+    titre: "Suivez les résultats",
+    description: "La plateforme Spilou vous donne accès à un tableau de bord personnalisable qui vous permet de suivre vos performances et de vous fixer les bons objectifs.",
+    lien: "#",
+  },
+];
+
+const stats = [
+  { chiffre: "97%", description: "Des consommateurs vous recherchent en premier sur internet" },
+  { chiffre: "46%", description: "Des recherches Google sont liées aux entreprises locales" },
+  { chiffre: "28%", description: "Des recherches locales débouchent sur un achat immédiat" },
+];
+
+const avantages = [
+  {
+    titre: "Économisez un temps précieux",
+    description: "En centralisant tout au même endroit, vous gagnerez du temps. Gérer vos profils, votre e-réputation ou vos objectifs depuis Spilou.",
+  },
+  {
+    titre: "Bénéficiez d'un vrai accompagnement",
+    description: "Nous vous accompagnons à 100% pour la rédaction de vos profils, la collecte et la gestion des avis ou encore de la prise en main du tableau de bord.",
+  },
+  {
+    titre: "Payez un prix juste et transparent",
+    description: "Nous sommes la solution la moins chère du marché. Nous avons à cœur de permettre à tous les commerçants de développer leur visibilité.",
+  },
+];
+
+const temoignages = [
+  {
+    citation: "Les outils de Spilou sont indispensables pour les commerçants qui cherchent à optimiser leurs résultats de recherches locales. Nous n'avions pas le temps de gérer ça régulièrement, aujourd'hui on gagne un temps de dingue.",
+    auteur: "César Armand",
+    entreprise: "Aux Arts",
+  },
+  {
+    citation: "Si vous voulez gagner du temps et de l'argent, alors Spilou doit faire partie de votre boîte à outils de référencement et de gestion d'avis. Ils m'ont bien aidé sur la partie SEO et ça m'a permis de toucher davantage de monde.",
+    auteur: "Arnaud Watine",
+    entreprise: "Kuupanda",
+  },
+  {
+    citation: "Spilou est l'un des top outils de marketing sur le marché... Il est rapide, précis et produit d'excellents rapports. L'aide à la rédaction de réponses aux commentaires fonctionne parfaitement. Je recommande pour leur sympathie également.",
+    auteur: "Antoine Chaveron",
+    entreprise: "Unicrypt",
+  },
 ];
 ---
 
-<!-- On "enveloppe" notre contenu dans le layout -->
-<!-- titre="accueil" envoie cette valeur au layout (c'est une "prop") -->
-<BaseLayout titre="accueil" MetaDescription="Ceci est une metadescription">
+<BaseLayout titre="Gérez votre e-réputation en 2 clics" MetaDescription="Obtenez plus de clients grâce à une meilleure visibilité sur internet. Spilou vous donne les clés pour améliorer votre visibilité sur internet et développer votre stratégie digitale.">
 
-  <h1>Bienvenue sur mon site</h1>
-  <p>
-    Ceci est un site construit avec Astro pour apprendre les bases.
-    Tout ce que tu vois ici est du HTML statique, aucun JavaScript
-    n'est envoyé au navigateur.
-  </p>
+  <!-- BLOC 1 : Hero -->
+  <section class="bloc hero">
+    <h1>Obtenez plus de clients grâce à une meilleure visibilité sur internet</h1>
+    <p class="hero-subtitle">Spilou vous donne les clés pour améliorer votre visibilité sur internet et développer votre stratégie digitale.</p>
+    <div class="hero-cta">
+      <a href="#" class="btn btn-primary">Nous contacter</a>
+      <a href="#" class="btn btn-secondary">Réaliser un audit</a>
+    </div>
+  </section>
 
-  <h2>ce que j'apprends</h2>
+  <!-- BLOC 2 : Statistiques -->
+  <section class="bloc bloc-alt">
+    <h2 class="bloc-titre">Exploitez tout le potentiel d'internet</h2>
+    <div class="stats-grid">
+      {stats.map((s) => (
+        <Stat chiffre={s.chiffre} description={s.description} />
+      ))}
+    </div>
+  </section>
 
-  <!-- .map() parcourt le tableau et crée une Carte pour chaque élément.
-       C'est comme une boucle for, mais en style JS. -->
-  {competences.map((c) => (
-    <Carte titre={c.titre} description={c.description} lien={c.lien}/>
-  ))}
+  <!-- BLOC 3 : Services -->
+  <section class="bloc">
+    <h2 class="bloc-titre">Être visible sur internet devient un jeu d'enfants</h2>
+    <p class="bloc-subtitle">Découvrez les services que nous vous proposons</p>
+    <div class="cartes-grid">
+      {services.map((s) => (
+        <Carte titre={s.titre} description={s.description} lien={s.lien} />
+      ))}
+    </div>
+  </section>
+
+  <!-- BLOC 4 : Bannière Audit -->
+  <section class="bloc bloc-accent">
+    <h2 class="bloc-titre">Réalisez un audit gratuitement</h2>
+    <p class="bloc-text">En quelques minutes nous auditons votre présence en ligne. Nous vous donnons gratuitement les premières briques de votre future stratégie digitale.</p>
+    <a href="#" class="btn btn-primary">Réalisez un audit</a>
+  </section>
+
+  <!-- BLOC 5 : Pourquoi nous faire confiance -->
+  <section>
+    <h2 class="bloc-titre">Pourquoi nous faire confiance ?</h2>
+    <div class="cartes-grid">
+      {avantages.map((a) => (
+        <Carte titre={a.titre} description={a.description} />
+      ))}
+    </div>
+  </section>
+
+  <!-- BLOC 6 : Témoignages -->
+  <section class="bloc">
+    <h2 class="bloc-titre">Ils en parlent mieux que nous</h2>
+    <div class="temoignages-grid">
+      {temoignages.map((t) => (
+        <Temoignage citation={t.citation} auteur={t.auteur} entreprise={t.entreprise} />
+      ))}
+    </div>
+  </section>
+
+  <!-- BLOC 7 : CTA final -->
+  <section class="bloc bloc-accent">
+    <h2 class="bloc-titre">Accélérez la croissance de votre entreprise grâce à une meilleure visibilité sur internet.</h2>
+    <p class="bloc-text">Grâce à notre solution tout-en-un, boostez votre présence en ligne</p>
+    <a href="#" class="btn btn-primary">Contactez un expert</a>
+  </section>
 
 </BaseLayout>
+
+<style>
+  /* Bloc de base : chaque section est un bloc opaque au-dessus des metaballs */
+  .bloc {
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: 0px 0px 10px 0px;
+    background: #081c37;
+    border-radius: 16px;
+  }
+
+  /* Blocs alternés : fond plus clair pour rythmer la page */
+  .bloc-alt {
+    background: #0d2a4a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Blocs d'accroche (CTA) : fond bleu marqué, centré */
+  .bloc-accent {
+    text-align: center;
+    background: linear-gradient(135deg, #0f3460, #0a2240);
+    border: 1px solid rgba(74, 144, 217, 0.4);
+  }
+
+  /* Titres de bloc */
+  .bloc-titre {
+    color: #ffffff;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .bloc-subtitle {
+    color: #aaa;
+    margin: -0.5rem 0 1.5rem 0;
+    font-size: 1.05rem;
+  }
+
+  .bloc-text {
+    color: #ccc;
+    max-width: 550px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+  }
+
+  /* Hero : fond transparent pour laisser voir les metaballs */
+  .hero {
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background: transparent;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.3;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: #bbb;
+    max-width: 550px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Boutons */
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .btn-primary {
+    background: #4a90d9;
+    color: #fff;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #4a90d9;
+    border: 2px solid #4a90d9;
+  }
+
+  /* Grilles */
+  .cartes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .stats-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .temoignages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cartes-grid,
+    .temoignages-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+      font-size: 1.6rem;
+    }
+
+    .bloc-titre {
+      font-size: 1.3rem;
+    }
+
+    .bloc {
+      padding: 3rem 1.25rem;
+    }
+  }
+</style>
