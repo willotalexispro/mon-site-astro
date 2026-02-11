@@ -19,7 +19,7 @@ import { auteurs } from '../../data/auteurs';
 export async function getStaticPaths() {
   const articles = await getCollection('blog');
   return articles.map((article) => ({
-    params: { slug: article.id },
+    params: { slug: article.id.replace(/\.md$/, '') },
     props: { article },
   }));
 }

@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx astro add:*)",
       "Bash(npm run build:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git push:*)",
+      "Bash(node -e:*)"
     ]
   }
 }
