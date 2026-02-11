@@ -28,7 +28,7 @@ const articlesTries = articles.sort((a, b) =>
     <Carte
       titre={article.data.titre}
       description={article.data.description}
-      lien={`/blog/${article.id}`}
+      lien={`/blog/${article.id.replace(/\.md$/, '')}`}
     />
   ))}
 
